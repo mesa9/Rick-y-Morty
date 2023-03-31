@@ -1,14 +1,26 @@
 import style from './App.module.css';
 import Nav from "./components/Nav/Nav.jsx";
 import Cards from './components/Cards/Cards.jsx';
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import About from './components/About/About';
 import Detail from './components/Detail/Detail';
+import Form from './components/Form/Form';
 
 
 function App () {
   const [characters, setCharacters] = useState([]);
+  const {pathname} = useLocation();
+  const [access, setAccess] = useState(false);
+  const navigate = useNavigate();
+
+useEffect(()=>{ 
+   !access && navigate("/");
+   }, [access]);
+
+const username = "micorreo@mail.com";
+const password = "mipass123";
+
   function onSearch(character) {
     fetch(`https://rickandmortyapi.com/api/character/${character}`)
        .then((response) => response.json())
@@ -28,14 +40,24 @@ function App () {
  };
 
  function onClose (id) {
-  setCharacters((oldChars) => {
+   setCharacters((oldChars) => {
   return oldChars.filter((char) => char.id !== id)});
+ };
+
+ const login = (userData) => {
+   if (userData.username === username && userData.password === password) {
+       setAccess(true);
+       navigate("/home");
+    } else {
+      alert("Datos incorrectos")
+    }
  };
   return (
    
     <div className={style.App}>
-       <Nav onSearch={onSearch}/>
+      {pathname !== "/" && <Nav onSearch={onSearch}/> }
        <Routes>
+         <Route path='/' element={<Form  login={login}/>} />
          <Route
          path="/home" 
          element= {<Cards onClose={onClose} characters={characters} />}
