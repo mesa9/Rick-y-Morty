@@ -1,0 +1,26 @@
+{
+  "name": "rickymorty",
+  "version": "1.0.0",
+  "description": "server rickymorty",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesa9/Rick-y-Morty.git"
+  },
+  "author": "Carlos Bedoya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mesa9/Rick-y-Morty/issues"
+  },
+  "homepage": "https://github.com/mesa9/Rick-y-Morty#readme",
+  "dependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
