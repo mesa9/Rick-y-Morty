@@ -1,5 +1,6 @@
 const http = require("http"); 
 const data = require("./utils/data")
+const getCharById = require("./controllers/getCharById")
 
 http.createServer((req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
